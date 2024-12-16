@@ -10,110 +10,108 @@
     <!-- Navigation Bar -->
     <nav class="nav-bar">
         <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#movies">Movies</a></li>
-            <li><a href="#music">Music</a></li>
-            <li><a href="#games">Games</a></li>
-            <li><a href="#feedback">Feedback</a></li>
+            <li><a href="#" class="tab-link" onclick="openTab(event, 'home')">Home</a></li>
+            <li><a href="#" class="tab-link" onclick="openTab(event, 'movies')">Movies</a></li>
+            <li><a href="#" class="tab-link" onclick="openTab(event, 'games')">Games</a></li>
+            <li><a href="#" class="tab-link" onclick="openTab(event, 'feedback')">Feedback</a></li>
         </ul>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="hero">
-        <h1>Welcome to Entertainment Hub</h1>
-        <p>Your one-stop destination for movies, music, and games!</p>
-    </header>
+    <!-- Home Section -->
+    <section id="home" class="tab-content">
+        <div class="hero">
+            <h1>Welcome to Entertainment Hub</h1>
+            <p>Your one-stop destination for movies and games!</p>
+        </div>
 
-    <!-- Image Gallery -->
-    <section id="gallery" class="gallery">
-        <h2>Featured Content</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/300x400" alt="Movie Poster 1">
-                <div class="overlay">
-                    <button class="cta-button">Watch Now</button>
+        <div class="featured-content">
+            <h2>Featured Content</h2>
+            <div class="content-grid">
+                <div class="content-card">
+                    <img src="https://via.placeholder.com/300x400" alt="Featured Movie">
+                    <h3>Latest Blockbuster</h3>
+                    <p>Experience the thrill of our newest releases!</p>
+                    <button onclick="openTab(event, 'movies')" class="cta-button">Watch Now</button>
                 </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/300x400" alt="Movie Poster 2">
-                <div class="overlay">
-                    <button class="cta-button">Watch Now</button>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/300x400" alt="Album Cover">
-                <div class="overlay">
-                    <button class="cta-button">Listen Here</button>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://via.placeholder.com/300x400" alt="Game Screenshot">
-                <div class="overlay">
-                    <button class="cta-button">Play Game</button>
+                <div class="content-card">
+                    <img src="https://via.placeholder.com/300x400" alt="Featured Game">
+                    <h3>Popular Games</h3>
+                    <p>Challenge yourself with our collection of games!</p>
+                    <button onclick="openTab(event, 'games')" class="cta-button">Play Now</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Schedule Table -->
-    <section id="schedule" class="schedule">
-        <h2>Upcoming Events</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Event</th>
-                    <th>Type</th>
-                    <th>Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Dec 20</td>
-                    <td>Avatar 2</td>
-                    <td>Movie Premier</td>
-                    <td>8:00 PM</td>
-                </tr>
-                <tr>
-                    <td>Dec 22</td>
-                    <td>Taylor Swift Concert</td>
-                    <td>Music Event</td>
-                    <td>7:30 PM</td>
-                </tr>
-                <tr>
-                    <td>Dec 25</td>
-                    <td>Gaming Tournament</td>
-                    <td>E-Sports</td>
-                    <td>2:00 PM</td>
-                </tr>
-            </tbody>
-        </table>
+    <!-- Movies Section -->
+    <section id="movies" class="tab-content">
+        <h2>Featured Movies</h2>
+        <div class="movie-grid">
+            <div class="movie-card">
+                <img src="https://via.placeholder.com/300x450" alt="Movie 1">
+                <div class="movie-info">
+                    <h3>The Matrix Resurrections</h3>
+                    <p class="genre">Sci-Fi / Action</p>
+                    <p class="description">Return to a world of two realities in this new chapter of the groundbreaking franchise that redefined a genre.</p>
+                    <div class="rating">⭐⭐⭐⭐½</div>
+                    <button class="cta-button">Watch Trailer</button>
+                </div>
+            </div>
+            <div class="movie-card">
+                <img src="https://via.placeholder.com/300x450" alt="Movie 2">
+                <div class="movie-info">
+                    <h3>Dune</h3>
+                    <p class="genre">Sci-Fi / Adventure</p>
+                    <p class="description">A mythic journey of survival on a desert planet, where the most valuable resource in existence sparks conflict across the galaxy.</p>
+                    <div class="rating">⭐⭐⭐⭐⭐</div>
+                    <button class="cta-button">Watch Trailer</button>
+                </div>
+            </div>
+            <div class="movie-card">
+                <img src="https://via.placeholder.com/300x450" alt="Movie 3">
+                <div class="movie-info">
+                    <h3>No Time to Die</h3>
+                    <p class="genre">Action / Adventure</p>
+                    <p class="description">James Bond has left active service but gets drawn back into action, facing a new threat to the world.</p>
+                    <div class="rating">⭐⭐⭐⭐</div>
+                    <button class="cta-button">Watch Trailer</button>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Registration Form -->
-    <section id="register" class="register">
-        <h2>Create Account</h2>
-        <form class="registration-form">
-            <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" required>
+    <!-- Games Section -->
+    <section id="games" class="tab-content">
+        <h2>Game Center</h2>
+        <div class="games-container">
+            <!-- Snake Game -->
+            <div class="game-box">
+                <h3>Snake Game</h3>
+                <div class="game-info">
+                    <p>Score: <span id="snakeScore">0</span></p>
+                    <button id="startSnake" class="game-button">Start Game</button>
+                </div>
+                <canvas id="snakeCanvas" width="400" height="400"></canvas>
+                <p class="game-instructions">Use arrow keys to control the snake. Collect food to grow longer!</p>
             </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
+
+            <!-- Memory Game -->
+            <div class="game-box">
+                <h3>Memory Game</h3>
+                <div class="game-info">
+                    <p>Moves: <span id="memoryMoves">0</span></p>
+                    <button id="resetMemory" class="game-button">Reset Game</button>
+                </div>
+                <div id="memoryGame" class="memory-grid"></div>
+                <p class="game-instructions">Find matching pairs by flipping cards. Complete with minimum moves!</p>
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit" class="submit-button">Register Now</button>
-        </form>
+        </div>
     </section>
 
-    <!-- Feedback Form -->
-    <section id="feedback" class="feedback">
+    <!-- Feedback Section -->
+    <section id="feedback" class="tab-content">
         <h2>Share Your Feedback</h2>
-        <form class="feedback-form">
+        <form class="feedback-form" onsubmit="event.preventDefault(); alert('Thank you for your feedback!');">
             <div class="form-group">
                 <label for="username">Your Name</label>
                 <input type="text" id="username" name="username" required>
@@ -140,5 +138,7 @@
     <footer>
         <p>&copy; 2024 Entertainment Hub. All rights reserved.</p>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

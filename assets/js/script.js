@@ -16,7 +16,7 @@ function openTab(evt, tabName) {
 
 // Prevent arrow key scrolling
 window.addEventListener("keydown", function(e) {
-    if([" ", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(e.code) > -1) {
+    if(["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.key)) {
         e.preventDefault();
     }
 }, false);
@@ -172,13 +172,10 @@ class SnakeGame {
             'ArrowUp': 'up',
             'ArrowDown': 'down',
             'ArrowLeft': 'left',
-            'ArrowRight': 'right',
-            'w': 'up',
-            's': 'down',
-            'a': 'left',
-            'd': 'right'
+            'ArrowRight': 'right'
         };
-        const newDirection = keyMap[event.key.toLowerCase()];
+
+        const newDirection = keyMap[event.key];
         if (newDirection) {
             const opposites = {
                 'up': 'down',
@@ -247,10 +244,10 @@ class SnakeGame {
         else if (head.x === this.food.x && head.y === this.food.y) {
             const points = this.powerUpActive ? 20 : 10;
             this.score += points;
-            if (this.score > this.highScore) {
-                this.highScore = this.score;
-                localStorage.setItem('snakeHighScore', this.highScore);
-                document.getElementById('snakeHighScore').textContent = this.highScore;
+            if (this.score > this.users[this.currentUser].highScore) {
+                this.users[this.currentUser].highScore = this.score;
+                this.saveUsers();
+                document.getElementById('snakeHighScore').textContent = this.score;
             }
             document.getElementById('snakeScore').textContent = this.score;
             this.food = this.generateFood();
@@ -559,85 +556,113 @@ class PasswordGame {
     }
 }
 
-// Initialize games when DOM is loaded
+// Rating System
+class RatingSystem {
+    constructor() {
+        this.ratings = this.loadRatings();
+        this.setupRatingForms();
+    }
+
+    loadRatings() {
+        return JSON.parse(localStorage.getItem('ratings') || '[]');
+    }
+
+    saveRating(rating) {
+        const ratings = this.loadRatings();
+        ratings.push({
+            ...rating,
+            timestamp: new Date().toISOString()
+        });
+        localStorage.setItem('ratings', JSON.stringify(ratings));
+    }
+
+    calculateAverageRating() {
+        const ratings = this.loadRatings();
+        if (ratings.length === 0) return 0;
+        const sum = ratings.reduce((acc, curr) => acc + parseInt(curr.rating), 0);
+        return (sum / ratings.length).toFixed(1);
+    }
+
+    setupRatingForms() {
+        // Quick Feedback Form
+        const quickFeedbackForm = document.getElementById('quickFeedbackForm');
+        if (quickFeedbackForm) {
+            quickFeedbackForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(quickFeedbackForm);
+                const rating = {
+                    name: formData.get('username'),
+                    rating: formData.get('rating'),
+                    comments: formData.get('comments'),
+                    type: 'quick'
+                };
+
+                this.saveRating(rating);
+                this.updateRatingDisplays();
+                this.showSuccessMessage(quickFeedbackForm, 'Thank you for your feedback!');
+                quickFeedbackForm.reset();
+            });
+        }
+
+        // Main Feedback Form
+        const mainFeedbackForm = document.getElementById('feedbackForm');
+        if (mainFeedbackForm) {
+            mainFeedbackForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(mainFeedbackForm);
+                const rating = {
+                    name: formData.get('username'),
+                    rating: formData.get('rating'),
+                    comments: formData.get('comments'),
+                    type: 'detailed'
+                };
+
+                this.saveRating(rating);
+                this.updateRatingDisplays();
+                this.showSuccessMessage(mainFeedbackForm, 'Thank you for your detailed feedback!');
+                mainFeedbackForm.reset();
+            });
+        }
+
+        // Initial rating displays update
+        this.updateRatingDisplays();
+    }
+
+    updateRatingDisplays() {
+        const averageRating = this.calculateAverageRating();
+        const ratingDisplays = document.querySelectorAll('.average-rating');
+        ratingDisplays.forEach(display => {
+            display.textContent = `Average Rating: ${averageRating}/5`;
+        });
+
+        // Update rating counts
+        const ratings = this.loadRatings();
+        const ratingCounts = document.querySelectorAll('.rating-count');
+        ratingCounts.forEach(count => {
+            count.textContent = `Total Ratings: ${ratings.length}`;
+        });
+    }
+
+    showSuccessMessage(form, message) {
+        const successMessage = document.createElement('div');
+        successMessage.className = 'feedback-success';
+        successMessage.textContent = message;
+        form.appendChild(successMessage);
+
+        setTimeout(() => {
+            successMessage.remove();
+        }, 3000);
+    }
+}
+
+// Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Set default tab
     document.getElementById('home').style.display = 'block';
     document.querySelector('.tab-link').classList.add('active');
 
-    // Initialize games
+    // Initialize games and rating system
     const snakeGame = new SnakeGame();
     const passwordGame = new PasswordGame();
-
-    // Handle quick feedback form
-    const quickFeedbackForm = document.getElementById('quickFeedbackForm');
-    if (quickFeedbackForm) {
-        quickFeedbackForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const formData = new FormData(quickFeedbackForm);
-            const feedback = {
-                name: formData.get('username'),
-                rating: formData.get('rating'),
-                comments: formData.get('comments')
-            };
-
-            // Store feedback in localStorage
-            let feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
-            feedbacks.push({
-                ...feedback,
-                timestamp: new Date().toISOString()
-            });
-            localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
-
-            // Show success message
-            const successMessage = document.createElement('div');
-            successMessage.className = 'feedback-success';
-            successMessage.textContent = 'Thank you for your feedback!';
-            quickFeedbackForm.appendChild(successMessage);
-
-            // Reset form
-            quickFeedbackForm.reset();
-
-            // Remove success message after 3 seconds
-            setTimeout(() => {
-                successMessage.remove();
-            }, 3000);
-        });
-    }
-
-    // Handle main feedback form
-    const mainFeedbackForm = document.getElementById('feedbackForm');
-    if (mainFeedbackForm) {
-        mainFeedbackForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const formData = new FormData(mainFeedbackForm);
-            const feedback = {
-                name: formData.get('username'),
-                rating: formData.get('rating'),
-                comments: formData.get('comments')
-            };
-
-            // Store feedback in localStorage
-            let feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
-            feedbacks.push({
-                ...feedback,
-                timestamp: new Date().toISOString()
-            });
-            localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
-
-            // Show success message
-            const successMessage = document.createElement('div');
-            successMessage.className = 'feedback-success';
-            successMessage.textContent = 'Thank you for your detailed feedback!';
-            mainFeedbackForm.appendChild(successMessage);
-
-            // Reset form
-            mainFeedbackForm.reset();
-
-            // Remove success message after 3 seconds
-            setTimeout(() => {
-                successMessage.remove();
-            }, 3000);
-        });
-    }
+    const ratingSystem = new RatingSystem();
 });

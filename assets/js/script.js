@@ -568,4 +568,76 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize games
     const snakeGame = new SnakeGame();
     const passwordGame = new PasswordGame();
+
+    // Handle quick feedback form
+    const quickFeedbackForm = document.getElementById('quickFeedbackForm');
+    if (quickFeedbackForm) {
+        quickFeedbackForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(quickFeedbackForm);
+            const feedback = {
+                name: formData.get('username'),
+                rating: formData.get('rating'),
+                comments: formData.get('comments')
+            };
+
+            // Store feedback in localStorage
+            let feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
+            feedbacks.push({
+                ...feedback,
+                timestamp: new Date().toISOString()
+            });
+            localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+
+            // Show success message
+            const successMessage = document.createElement('div');
+            successMessage.className = 'feedback-success';
+            successMessage.textContent = 'Thank you for your feedback!';
+            quickFeedbackForm.appendChild(successMessage);
+
+            // Reset form
+            quickFeedbackForm.reset();
+
+            // Remove success message after 3 seconds
+            setTimeout(() => {
+                successMessage.remove();
+            }, 3000);
+        });
+    }
+
+    // Handle main feedback form
+    const mainFeedbackForm = document.getElementById('feedbackForm');
+    if (mainFeedbackForm) {
+        mainFeedbackForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(mainFeedbackForm);
+            const feedback = {
+                name: formData.get('username'),
+                rating: formData.get('rating'),
+                comments: formData.get('comments')
+            };
+
+            // Store feedback in localStorage
+            let feedbacks = JSON.parse(localStorage.getItem('feedbacks') || '[]');
+            feedbacks.push({
+                ...feedback,
+                timestamp: new Date().toISOString()
+            });
+            localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+
+            // Show success message
+            const successMessage = document.createElement('div');
+            successMessage.className = 'feedback-success';
+            successMessage.textContent = 'Thank you for your detailed feedback!';
+            mainFeedbackForm.appendChild(successMessage);
+
+            // Reset form
+            mainFeedbackForm.reset();
+
+            // Remove success message after 3 seconds
+            setTimeout(() => {
+                successMessage.remove();
+            }, 3000);
+        });
+    }
 });

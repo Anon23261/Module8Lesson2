@@ -68,6 +68,27 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+/* Hero Section */
+.hero-section {
+    text-align: center;
+    padding: 40px 0;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.hero-section h1 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    color: #3498db;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-section p {
+    font-size: 1.2em;
+    color: #ecf0f1;
+}
+
 /* Tab Navigation */
 .tab-container {
     display: flex;
@@ -101,6 +122,14 @@ body {
 /* Featured Content */
 .featured-content {
     padding: 4rem 2rem;
+    margin-bottom: 40px;
+}
+
+.featured-content h2 {
+    text-align: center;
+    color: #3498db;
+    margin-bottom: 30px;
+    font-size: 2em;
 }
 
 .content-grid {
@@ -407,6 +436,24 @@ button:hover {
     to { opacity: 1; }
 }
 
+/* Feedback Success Message */
+.feedback-success {
+    background: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 20px;
+    animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-10px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
@@ -434,4 +481,138 @@ footer {
     background: #2c3e50;
     color: white;
     margin-top: 4rem;
+}
+
+/* Homepage Sections */
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.content-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.content-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.card-icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+}
+
+.content-card h3 {
+    color: #3498db;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.content-card p {
+    color: #ecf0f1;
+    margin-bottom: 15px;
+}
+
+.content-card ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.content-card ul li {
+    color: #bdc3c7;
+    margin: 10px 0;
+    padding-left: 20px;
+    position: relative;
+}
+
+.content-card ul li:before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #3498db;
+}
+
+.play-button {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: auto;
+}
+
+.play-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+}
+
+.quick-feedback {
+    max-width: 600px;
+    margin: 0 auto 40px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.quick-feedback h2 {
+    text-align: center;
+    color: #3498db;
+    margin-bottom: 25px;
+}
+
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 5px;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    font-size: 30px;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input:checked ~ label {
+    color: #f1c40f;
+}
+
+.submit-button {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 20px;
+}
+
+.submit-button:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
 }

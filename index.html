@@ -17,20 +17,67 @@
 
         <!-- Home Tab -->
         <div id="home" class="tab-content">
-            <h1>Welcome to Entertainment Hub</h1>
-            <p>Explore our collection of games, movies, and more!</p>
+            <div class="hero-section">
+                <h1>Welcome to Entertainment Hub</h1>
+                <p>Your ultimate destination for games and entertainment!</p>
+            </div>
+            
             <div class="featured-content">
-                <h2>Featured Content</h2>
+                <h2>Featured Games</h2>
                 <div class="content-grid">
                     <div class="content-card">
+                        <div class="card-icon">🐍</div>
                         <h3>Enhanced Snake Game</h3>
-                        <p>Try our upgraded snake game with power-ups and high scores!</p>
+                        <p>Challenge yourself with our upgraded snake game featuring:</p>
+                        <ul>
+                            <li>Power-ups and special effects</li>
+                            <li>Multiple user profiles</li>
+                            <li>High score tracking</li>
+                        </ul>
+                        <button onclick="openTab(event, 'games')" class="play-button">Play Now</button>
                     </div>
                     <div class="content-card">
+                        <div class="card-icon">🔒</div>
                         <h3>Password Security Game</h3>
-                        <p>Learn cybersecurity while testing password strength!</p>
+                        <p>Learn cybersecurity while having fun:</p>
+                        <ul>
+                            <li>Test password strength</li>
+                            <li>Get security tips</li>
+                            <li>Learn best practices</li>
+                        </ul>
+                        <button onclick="openTab(event, 'games')" class="play-button">Try It</button>
                     </div>
                 </div>
+            </div>
+
+            <div class="quick-feedback">
+                <h2>Quick Feedback</h2>
+                <form id="quickFeedbackForm" class="feedback-form">
+                    <div class="form-group">
+                        <label for="quickName">Name:</label>
+                        <input type="text" id="quickName" name="username" required autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="quickRating">Rating:</label>
+                        <div class="star-rating">
+                            <input type="radio" id="star5" name="rating" value="5" required>
+                            <label for="star5">★</label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4">★</label>
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3">★</label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2">★</label>
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1">★</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="quickComments">Quick Comment:</label>
+                        <textarea id="quickComments" name="comments" rows="2" placeholder="Share your thoughts..." autocomplete="off"></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Send Feedback</button>
+                </form>
             </div>
         </div>
 

@@ -101,7 +101,7 @@ Feel free to contribute! Open a pull request or submit an issue.
 This project is licensed under the MIT License.
 
 ---
-Made with ❤️ by Entertainment Hub Team
+Made with ❤️ by GHOST Sec
 
 ## 🎮 Quick Start
 1. Clone the repository

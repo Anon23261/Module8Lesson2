@@ -7,133 +7,132 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="nav-bar">
-        <ul>
-            <li><a href="#" class="tab-link" onclick="openTab(event, 'home')">Home</a></li>
-            <li><a href="#" class="tab-link" onclick="openTab(event, 'movies')">Movies</a></li>
-            <li><a href="#" class="tab-link" onclick="openTab(event, 'games')">Games</a></li>
-            <li><a href="#" class="tab-link" onclick="openTab(event, 'feedback')">Feedback</a></li>
-        </ul>
-    </nav>
+    <div class="container">
+        <div class="tab-container">
+            <button class="tab-link" onclick="openTab(event, 'home')">Home</button>
+            <button class="tab-link" onclick="openTab(event, 'games')">Games</button>
+            <button class="tab-link" onclick="openTab(event, 'movies')">Movies</button>
+            <button class="tab-link" onclick="openTab(event, 'feedback')">Feedback</button>
+        </div>
 
-    <!-- Home Section -->
-    <section id="home" class="tab-content">
-        <div class="hero">
+        <!-- Home Tab -->
+        <div id="home" class="tab-content">
             <h1>Welcome to Entertainment Hub</h1>
-            <p>Your one-stop destination for movies and games!</p>
-        </div>
-
-        <div class="featured-content">
-            <h2>Featured Content</h2>
-            <div class="content-grid">
-                <div class="content-card">
-                    <img src="https://via.placeholder.com/300x400" alt="Featured Movie">
-                    <h3>Latest Blockbuster</h3>
-                    <p>Experience the thrill of our newest releases!</p>
-                    <button onclick="openTab(event, 'movies')" class="cta-button">Watch Now</button>
-                </div>
-                <div class="content-card">
-                    <img src="https://via.placeholder.com/300x400" alt="Featured Game">
-                    <h3>Popular Games</h3>
-                    <p>Challenge yourself with our collection of games!</p>
-                    <button onclick="openTab(event, 'games')" class="cta-button">Play Now</button>
+            <p>Explore our collection of games, movies, and more!</p>
+            <div class="featured-content">
+                <h2>Featured Content</h2>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h3>Enhanced Snake Game</h3>
+                        <p>Try our upgraded snake game with power-ups and high scores!</p>
+                    </div>
+                    <div class="content-card">
+                        <h3>Password Security Game</h3>
+                        <p>Learn cybersecurity while testing password strength!</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Movies Section -->
-    <section id="movies" class="tab-content">
-        <h2>Featured Movies</h2>
-        <div class="movie-grid">
-            <div class="movie-card">
-                <img src="https://via.placeholder.com/300x450" alt="Movie 1">
-                <div class="movie-info">
-                    <h3>The Matrix Resurrections</h3>
-                    <p class="genre">Sci-Fi / Action</p>
-                    <p class="description">Return to a world of two realities in this new chapter of the groundbreaking franchise that redefined a genre.</p>
-                    <div class="rating">⭐⭐⭐⭐½</div>
-                    <button class="cta-button">Watch Trailer</button>
+        <!-- Games Tab -->
+        <div id="games" class="tab-content">
+            <div class="games-container">
+                <div class="game-section">
+                    <h2>Snake Game</h2>
+                    <div class="game-info">
+                        <p>Score: <span id="snakeScore">0</span></p>
+                        <p>High Score: <span id="snakeHighScore">0</span></p>
+                        <button id="startSnake">Start Game</button>
+                    </div>
+                    <canvas id="snakeCanvas" width="400" height="400"></canvas>
+                    <div class="game-instructions">
+                        <h3>How to Play:</h3>
+                        <p>Use arrow keys or WASD to control the snake</p>
+                        <p>Collect food to grow longer</p>
+                        <p>Special power-ups appear randomly:</p>
+                        <ul>
+                            <li> Speed Boost - Move faster for 5 seconds</li>
+                            <li> Double Points - Score more points for 5 seconds</li>
+                        </ul>
+                        <p>Cross the walls to appear on the other side!</p>
+                    </div>
                 </div>
-            </div>
-            <div class="movie-card">
-                <img src="https://via.placeholder.com/300x450" alt="Movie 2">
-                <div class="movie-info">
-                    <h3>Dune</h3>
-                    <p class="genre">Sci-Fi / Adventure</p>
-                    <p class="description">A mythic journey of survival on a desert planet, where the most valuable resource in existence sparks conflict across the galaxy.</p>
-                    <div class="rating">⭐⭐⭐⭐⭐</div>
-                    <button class="cta-button">Watch Trailer</button>
-                </div>
-            </div>
-            <div class="movie-card">
-                <img src="https://via.placeholder.com/300x450" alt="Movie 3">
-                <div class="movie-info">
-                    <h3>No Time to Die</h3>
-                    <p class="genre">Action / Adventure</p>
-                    <p class="description">James Bond has left active service but gets drawn back into action, facing a new threat to the world.</p>
-                    <div class="rating">⭐⭐⭐⭐</div>
-                    <button class="cta-button">Watch Trailer</button>
+
+                <div class="game-section">
+                    <h2>Password Strength Game</h2>
+                    <div class="password-game">
+                        <div class="password-input">
+                            <input type="password" id="passwordInput" placeholder="Enter a password">
+                            <progress id="strengthMeter" value="0" max="100"></progress>
+                            <p>Security Score: <span id="securityScore">0</span>/100</p>
+                        </div>
+                        <div class="password-feedback">
+                            <div id="passwordFeedback"></div>
+                            <div id="securityTips" class="security-tips"></div>
+                        </div>
+                        <div class="game-instructions">
+                            <h3>Learn Password Security:</h3>
+                            <p>Create a strong password that meets security requirements</p>
+                            <p>Watch your security score increase as you add:</p>
+                            <ul>
+                                <li>Uppercase and lowercase letters</li>
+                                <li>Numbers and special characters</li>
+                                <li>Sufficient length (minimum 8 characters)</li>
+                            </ul>
+                            <p>Avoid common patterns and learn cybersecurity best practices!</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Games Section -->
-    <section id="games" class="tab-content">
-        <h2>Game Center</h2>
-        <div class="games-container">
-            <!-- Snake Game -->
-            <div class="game-box">
-                <h3>Snake Game</h3>
-                <div class="game-info">
-                    <p>Score: <span id="snakeScore">0</span></p>
-                    <button id="startSnake" class="game-button">Start Game</button>
+        <!-- Movies Tab -->
+        <div id="movies" class="tab-content">
+            <div class="movies-grid">
+                <!-- Movie cards will be dynamically added here -->
+                <div class="movie-card">
+                    <img src="assets/images/movie1.jpg" alt="Movie 1">
+                    <div class="movie-info">
+                        <h3>Movie Title</h3>
+                        <p class="genre">Action, Adventure</p>
+                        <p class="description">Experience an epic adventure...</p>
+                        <div class="rating">★★★★☆</div>
+                        <button class="watch-trailer">Watch Trailer</button>
+                    </div>
                 </div>
-                <canvas id="snakeCanvas" width="400" height="400"></canvas>
-                <p class="game-instructions">Use arrow keys to control the snake. Collect food to grow longer!</p>
-            </div>
-
-            <!-- Memory Game -->
-            <div class="game-box">
-                <h3>Memory Game</h3>
-                <div class="game-info">
-                    <p>Moves: <span id="memoryMoves">0</span></p>
-                    <button id="resetMemory" class="game-button">Reset Game</button>
-                </div>
-                <div id="memoryGame" class="memory-grid"></div>
-                <p class="game-instructions">Find matching pairs by flipping cards. Complete with minimum moves!</p>
+                <!-- Add more movie cards as needed -->
             </div>
         </div>
-    </section>
 
-    <!-- Feedback Section -->
-    <section id="feedback" class="tab-content">
-        <h2>Share Your Feedback</h2>
-        <form class="feedback-form" onsubmit="event.preventDefault(); alert('Thank you for your feedback!');">
-            <div class="form-group">
-                <label for="username">Your Name</label>
-                <input type="text" id="username" name="username" required autocomplete="name">
+        <!-- Feedback Tab -->
+        <div id="feedback" class="tab-content">
+            <div class="feedback-form">
+                <h2>Share Your Feedback</h2>
+                <form id="feedbackForm">
+                    <div class="form-group">
+                        <label for="username">Name:</label>
+                        <input type="text" id="username" name="username" required autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="rating">Rating:</label>
+                        <select id="rating" name="rating" required autocomplete="off">
+                            <option value="">Select a rating</option>
+                            <option value="5">5 - Excellent</option>
+                            <option value="4">4 - Very Good</option>
+                            <option value="3">3 - Good</option>
+                            <option value="2">2 - Fair</option>
+                            <option value="1">1 - Poor</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="comments">Comments:</label>
+                        <textarea id="comments" name="comments" rows="4" autocomplete="off"></textarea>
+                    </div>
+                    <button type="submit">Submit Feedback</button>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="rating">Rating</label>
-                <select id="rating" name="rating" required autocomplete="off">
-                    <option value="">Select Rating</option>
-                    <option value="5">5 - Excellent</option>
-                    <option value="4">4 - Very Good</option>
-                    <option value="3">3 - Good</option>
-                    <option value="2">2 - Fair</option>
-                    <option value="1">1 - Poor</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="comments">Comments</label>
-                <textarea id="comments" name="comments" rows="4" required autocomplete="off"></textarea>
-            </div>
-            <button type="submit" class="submit-button">Submit Feedback</button>
-        </form>
-    </section>
+        </div>
+    </div>
 
     <footer>
         <p>&copy; 2024 Entertainment Hub. All rights reserved.</p>

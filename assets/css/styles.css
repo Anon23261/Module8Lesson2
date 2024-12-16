@@ -8,8 +8,15 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 /* Navigation Bar */
@@ -61,15 +68,34 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Tab Content */
-.tab-content {
-    display: none;
-    animation: fadeIn 0.5s ease-in-out;
+/* Tab Navigation */
+.tab-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.tab-link {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.tab-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.tab-link.active {
+    background: #3498db;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.5s ease;
 }
 
 /* Featured Content */
@@ -111,213 +137,212 @@ body {
     color: #666;
 }
 
-/* Movie Grid */
-.movie-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    padding: 2rem;
-}
-
-.movie-card {
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.movie-card:hover {
-    transform: translateY(-10px);
-}
-
-.movie-card img {
-    width: 100%;
-    height: auto;
-}
-
-.movie-info {
-    padding: 1.5rem;
-}
-
-.movie-info h3 {
-    color: #2c3e50;
-    margin-bottom: 0.5rem;
-}
-
-.genre {
-    color: #666;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-}
-
-.description {
-    color: #333;
-    margin-bottom: 1rem;
-}
-
-.rating {
-    color: #f1c40f;
-    margin-bottom: 1rem;
-}
-
 /* Games Container */
 .games-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 2rem;
-    padding: 2rem;
+    gap: 30px;
+    padding: 20px 0;
 }
 
-.game-box {
-    background: white;
+.game-section {
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
-    padding: 2rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.game-box h3 {
-    color: #2c3e50;
-    margin-bottom: 1rem;
+.game-section h2 {
+    color: #3498db;
+    margin-bottom: 15px;
     text-align: center;
 }
 
+/* Snake Game */
 .game-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
-}
-
-.game-button {
-    background: linear-gradient(to right, #3498db, #2980b9);
-    color: white;
-    border: none;
-    padding: 0.8rem 1.5rem;
-    border-radius: 25px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-
-.game-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 15px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
 }
 
 #snakeCanvas {
+    display: block;
+    margin: 0 auto;
     background: #2c3e50;
-    border-radius: 8px;
-    margin: 1rem 0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Memory Game */
-.memory-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    margin: 1rem 0;
-}
-
-.memory-card {
-    aspect-ratio: 1;
-    perspective: 1000px;
-    cursor: pointer;
-}
-
-.card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
-}
-
-.memory-card.flipped .card-inner {
-    transform: rotateY(180deg);
-}
-
-.card-front, .card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    border-radius: 8px;
+/* Password Game */
+.password-game {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
+    flex-direction: column;
+    gap: 20px;
 }
 
-.card-front {
-    background: linear-gradient(135deg, #3498db, #2c3e50);
+.password-input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.card-back {
-    background: white;
-    transform: rotateY(180deg);
-    border: 2px solid #3498db;
+#passwordInput {
+    padding: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 16px;
+    width: 100%;
+    transition: all 0.3s ease;
 }
 
+#passwordInput:focus {
+    outline: none;
+    border-color: #3498db;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+#strengthMeter {
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+}
+
+#strengthMeter.very-weak::-webkit-progress-value { background-color: #e74c3c; }
+#strengthMeter.weak::-webkit-progress-value { background-color: #e67e22; }
+#strengthMeter.medium::-webkit-progress-value { background-color: #f1c40f; }
+#strengthMeter.strong::-webkit-progress-value { background-color: #2ecc71; }
+#strengthMeter.very-strong::-webkit-progress-value { background-color: #27ae60; }
+
+.password-feedback {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+#passwordFeedback {
+    margin-bottom: 15px;
+}
+
+.security-tips {
+    font-size: 0.9em;
+    color: #bdc3c7;
+}
+
+/* Game Instructions */
 .game-instructions {
-    text-align: center;
-    color: #666;
-    margin-top: 1rem;
-    font-size: 0.9rem;
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
 }
 
-/* Forms */
+.game-instructions h3 {
+    color: #3498db;
+    margin-bottom: 10px;
+}
+
+.game-instructions ul {
+    list-style-position: inside;
+    margin-top: 10px;
+}
+
+.game-instructions li {
+    margin: 5px 0;
+    color: #bdc3c7;
+}
+
+/* Buttons */
+button {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #2980b9;
+}
+
+/* Movies Grid */
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+/* Feedback Form */
 .feedback-form {
     max-width: 600px;
     margin: 0 auto;
-    padding: 2rem;
-    background: white;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 20px;
 }
 
-label {
+.form-group label {
     display: block;
-    margin-bottom: 0.5rem;
-    color: #2c3e50;
-    font-weight: 500;
+    margin-bottom: 5px;
+    color: #3498db;
 }
 
-input, select, textarea {
+.form-group input,
+.form-group select,
+.form-group textarea {
     width: 100%;
-    padding: 0.8rem;
-    border: 2px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
-
-input:focus, select:focus, textarea:focus {
-    border-color: #3498db;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-}
-
-.submit-button {
-    background: linear-gradient(to right, #3498db, #2980b9);
+    padding: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
     color: white;
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 25px;
-    cursor: pointer;
-    font-weight: bold;
-    width: 100%;
-    transition: all 0.3s ease;
+    font-size: 16px;
 }
 
-.submit-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .games-container {
+        grid-template-columns: 1fr;
+    }
+
+    .game-section {
+        padding: 15px;
+    }
+
+    #snakeCanvas {
+        width: 100%;
+        height: auto;
+    }
 }
 
 /* Footer */
@@ -327,31 +352,4 @@ footer {
     background: #2c3e50;
     color: white;
     margin-top: 4rem;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .nav-bar ul {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    .hero h1 {
-        font-size: 2rem;
-    }
-
-    .content-grid, .movie-grid, .games-container {
-        grid-template-columns: 1fr;
-    }
-
-    .memory-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 480px) {
-    .memory-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
 }

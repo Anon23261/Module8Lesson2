@@ -14,6 +14,13 @@ function openTab(evt, tabName) {
     evt.currentTarget.className += " active";
 }
 
+// Prevent arrow key scrolling
+window.addEventListener("keydown", function(e) {
+    if([" ", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(e.code) > -1) {
+        e.preventDefault();
+    }
+}, false);
+
 // Enhanced Snake Game
 class SnakeGame {
     constructor() {
@@ -24,15 +31,23 @@ class SnakeGame {
         this.food = this.generateFood();
         this.direction = 'right';
         this.score = 0;
-        this.highScore = localStorage.getItem('snakeHighScore') || 0;
         this.gameLoop = null;
         this.speed = 100;
         this.powerUp = null;
         this.powerUpActive = false;
         this.powerUpTimer = null;
+        this.currentUser = '';
+        this.users = this.loadUsers();
+
+        // Create user profile elements
+        this.createUserInterface();
 
         document.addEventListener('keydown', this.handleKeyPress.bind(this));
         document.getElementById('startSnake').addEventListener('click', () => {
+            if (!this.currentUser) {
+                alert('Please select or create a user profile first!');
+                return;
+            }
             if (this.gameLoop) {
                 this.pauseGame();
             } else {
@@ -40,8 +55,93 @@ class SnakeGame {
             }
         });
 
-        // Update high score display
-        document.getElementById('snakeHighScore').textContent = this.highScore;
+        // Update high scores display
+        this.updateHighScoresDisplay();
+    }
+
+    createUserInterface() {
+        // Create user profile section
+        const userSection = document.createElement('div');
+        userSection.className = 'user-profile-section';
+        userSection.innerHTML = `
+            <div class="user-select">
+                <select id="userSelect">
+                    <option value="">Select User</option>
+                    ${Object.keys(this.users).map(user => 
+                        `<option value="${user}">${user}</option>`
+                    ).join('')}
+                </select>
+                <div class="new-user-input">
+                    <input type="text" id="newUsername" placeholder="New username">
+                    <button id="createUser">Create User</button>
+                </div>
+            </div>
+            <div class="high-scores">
+                <h3>High Scores</h3>
+                <div id="highScoresList"></div>
+            </div>
+        `;
+
+        // Insert before the game info
+        const gameInfo = document.querySelector('.game-info');
+        gameInfo.parentNode.insertBefore(userSection, gameInfo);
+
+        // Add event listeners
+        document.getElementById('userSelect').addEventListener('change', (e) => {
+            this.currentUser = e.target.value;
+            if (this.currentUser) {
+                this.updateHighScoresDisplay();
+            }
+        });
+
+        document.getElementById('createUser').addEventListener('click', () => {
+            const newUsername = document.getElementById('newUsername').value.trim();
+            if (newUsername) {
+                if (Object.keys(this.users).length >= 3 && !this.users[newUsername]) {
+                    alert('Maximum 3 users allowed! Please select an existing user.');
+                    return;
+                }
+                if (!this.users[newUsername]) {
+                    this.users[newUsername] = {
+                        highScore: 0,
+                        scores: []
+                    };
+                    this.saveUsers();
+                    
+                    // Update user select
+                    const option = new Option(newUsername, newUsername);
+                    document.getElementById('userSelect').add(option);
+                }
+                document.getElementById('userSelect').value = newUsername;
+                this.currentUser = newUsername;
+                this.updateHighScoresDisplay();
+                document.getElementById('newUsername').value = '';
+            }
+        });
+    }
+
+    loadUsers() {
+        const savedUsers = localStorage.getItem('snakeUsers');
+        return savedUsers ? JSON.parse(savedUsers) : {};
+    }
+
+    saveUsers() {
+        localStorage.setItem('snakeUsers', JSON.stringify(this.users));
+    }
+
+    updateHighScoresDisplay() {
+        const highScoresList = document.getElementById('highScoresList');
+        const scores = Object.entries(this.users)
+            .map(([name, data]) => ({name, score: data.highScore}))
+            .sort((a, b) => b.score - a.score);
+
+        highScoresList.innerHTML = scores
+            .map(({name, score}) => 
+                `<div class="high-score-entry ${name === this.currentUser ? 'current-user' : ''}">
+                    <span>${name}</span>
+                    <span>${score}</span>
+                </div>`
+            ).join('');
     }
 
     generateFood() {
@@ -311,6 +411,20 @@ class SnakeGame {
         clearInterval(this.gameLoop);
         this.gameLoop = null;
         
+        // Update user scores
+        if (this.currentUser) {
+            const user = this.users[this.currentUser];
+            if (this.score > user.highScore) {
+                user.highScore = this.score;
+            }
+            user.scores.push(this.score);
+            if (user.scores.length > 5) { // Keep only last 5 scores
+                user.scores.shift();
+            }
+            this.saveUsers();
+            this.updateHighScoresDisplay();
+        }
+
         // Draw game over screen
         this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -321,7 +435,10 @@ class SnakeGame {
         this.ctx.fillText('Game Over!', this.canvas.width/2, this.canvas.height/2 - 30);
         this.ctx.font = '20px Arial';
         this.ctx.fillText(`Score: ${this.score}`, this.canvas.width/2, this.canvas.height/2 + 10);
-        this.ctx.fillText(`High Score: ${this.highScore}`, this.canvas.width/2, this.canvas.height/2 + 40);
+        if (this.currentUser) {
+            const userHighScore = this.users[this.currentUser].highScore;
+            this.ctx.fillText(`Your High Score: ${userHighScore}`, this.canvas.width/2, this.canvas.height/2 + 40);
+        }
         
         document.getElementById('startSnake').textContent = 'Start New Game';
         

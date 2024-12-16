@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entertainment Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="nav-bar">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#movies">Movies</a></li>
+            <li><a href="#music">Music</a></li>
+            <li><a href="#games">Games</a></li>
+            <li><a href="#feedback">Feedback</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1>Welcome to Entertainment Hub</h1>
+        <p>Your one-stop destination for movies, music, and games!</p>
+    </header>
+
+    <!-- Image Gallery -->
+    <section id="gallery" class="gallery">
+        <h2>Featured Content</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/300x400" alt="Movie Poster 1">
+                <div class="overlay">
+                    <button class="cta-button">Watch Now</button>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/300x400" alt="Movie Poster 2">
+                <div class="overlay">
+                    <button class="cta-button">Watch Now</button>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/300x400" alt="Album Cover">
+                <div class="overlay">
+                    <button class="cta-button">Listen Here</button>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://via.placeholder.com/300x400" alt="Game Screenshot">
+                <div class="overlay">
+                    <button class="cta-button">Play Game</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Table -->
+    <section id="schedule" class="schedule">
+        <h2>Upcoming Events</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Event</th>
+                    <th>Type</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Dec 20</td>
+                    <td>Avatar 2</td>
+                    <td>Movie Premier</td>
+                    <td>8:00 PM</td>
+                </tr>
+                <tr>
+                    <td>Dec 22</td>
+                    <td>Taylor Swift Concert</td>
+                    <td>Music Event</td>
+                    <td>7:30 PM</td>
+                </tr>
+                <tr>
+                    <td>Dec 25</td>
+                    <td>Gaming Tournament</td>
+                    <td>E-Sports</td>
+                    <td>2:00 PM</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Registration Form -->
+    <section id="register" class="register">
+        <h2>Create Account</h2>
+        <form class="registration-form">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="submit-button">Register Now</button>
+        </form>
+    </section>
+
+    <!-- Feedback Form -->
+    <section id="feedback" class="feedback">
+        <h2>Share Your Feedback</h2>
+        <form class="feedback-form">
+            <div class="form-group">
+                <label for="username">Your Name</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="rating">Rating</label>
+                <select id="rating" name="rating" required>
+                    <option value="">Select Rating</option>
+                    <option value="5">5 - Excellent</option>
+                    <option value="4">4 - Very Good</option>
+                    <option value="3">3 - Good</option>
+                    <option value="2">2 - Fair</option>
+                    <option value="1">1 - Poor</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="comments">Comments</label>
+                <textarea id="comments" name="comments" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="submit-button">Submit Feedback</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Entertainment Hub. All rights reserved.</p>
+    </footer>
+</body>
+</html>
